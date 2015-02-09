@@ -18,3 +18,23 @@ hexo-renderer-stylus
 或者当前目录运行npm install XXX(插件名) --save就好了
 或者在当前目录执行
 npm install
+
+-----------
+### hexo的备份
+
+####安装[hexo-git-backup](https://github.com/coneycode/hexo-git-backup)
+    $ npm install hexo-git-backup 
+
+在github上创建branch
+#### 在_config.yml中配置
+
+    backup:
+        type: git
+        theme: coney
+        repository:
+        github: git@github.com:xxx/xxx.git,branchName
+        #gitcafe: git@github.com:xxx/xxx.git,branchName
+
+#### 使用
+
+    $hexo b

@@ -89,6 +89,7 @@ deploy:
   repository: https://github.com/vc1235/vc1235.github.io.git
 backup:
     type: git
+    theme: landscape-plus
     repository:
        github: https://github.com/vc1235/vc1235.github.io.git,backup
  #      gitcafe: git@github.com:xxx/xxx.git,branchName
