@@ -38,6 +38,10 @@
         <a href="/" id="logo">Sunxx&#39;s Blog</a>
       </h1>
       
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">我们的征途是星辰大海！</a>
+        </h2>
+      
     </div>
     <div id="header-inner" class="inner">
       <nav id="main-nav">
@@ -97,12 +101,26 @@
 <hr>
 <h3 id="安装hexo后，生成的首页是代码">安装hexo后，生成的首页是代码</h3>
 <p>貌似hexo某个版本就没加<br>hexo-renderer-ejs<br>hexo-renderer-marked<br>hexo-renderer-stylus<br>这些插件了，你可以在dependencies里面加上这些然后再install<br>或者当前目录运行npm install XXX(插件名) —save就好了<br>或者在当前目录执行<br>npm install</p>
-
+<hr>
+<h3 id="hexo的备份">hexo的备份</h3>
+<h4 id="安装hexo-git-backup">安装<a href="https://github.com/coneycode/hexo-git-backup" target="_blank" rel="external">hexo-git-backup</a></h4>
+<pre><code>$ npm <span class="operator"><span class="keyword">install</span> hexo-git-<span class="keyword">backup</span> </span>
+</code></pre><p>在github上创建branch</p>
+<h4 id="在_config-yml中配置">在_config.yml中配置</h4>
+<pre><code><span class="symbol">backup:</span>
+    <span class="symbol">type:</span> git
+    <span class="symbol">theme:</span> coney
+    <span class="symbol">repository:</span>
+    <span class="symbol">github:</span> git<span class="variable">@github</span>.<span class="symbol">com:</span>xxx/xxx.git,branchName
+    <span class="comment">#gitcafe: git<span class="yardoctag">@github</span>.com:xxx/xxx.git,branchName</span>
+</code></pre><h4 id="使用">使用</h4>
+<pre><code><span class="variable">$hexo</span> b
+</code></pre>
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://vc1235.github.io/2015/02/06/hexo_deploy/" data-id="i6mdngw0ba5ciylz" class="article-share-link" data-share="baidu">Share</a>
+        <a data-url="http://vc1235.github.io/2015/02/06/hexo_deploy/" data-id="motms1y830kxqv6z" class="article-share-link" data-share="baidu">Share</a>
       
 
       
@@ -162,7 +180,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://vc1235.github.io/2015/02/06/hello-world/" data-id="7lulr921wg4l80gy" class="article-share-link" data-share="baidu">Share</a>
+        <a data-url="http://vc1235.github.io/2015/02/06/hello-world/" data-id="0ijm36stjs00ovlk" class="article-share-link" data-share="baidu">Share</a>
       
 
       
