@@ -130,9 +130,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>这次的问题是怎么也deploy不成功，总是如下显示<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>hexo d</span><br><span class="line"><span class="constant">ERROR Deployer </span><span class="keyword">not</span> <span class="symbol">found:</span> git</span><br></pre></td></tr></table></figure></p>
+        <h2 id="部署问题">部署问题</h2><p>这次的问题是怎么也deploy不成功，总是如下显示<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>hexo d</span><br><span class="line"><span class="constant">ERROR Deployer </span><span class="keyword">not</span> <span class="symbol">found:</span> git</span><br></pre></td></tr></table></figure></p>
 <p>虽然不知道原因，但找到了解决方案<br>运行<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure></p>
 <p>就解决了。</p>
+<h2 id="标签问题">标签问题</h2><p>多个标签要写成这个样子<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tags: [hexo,mac]</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
