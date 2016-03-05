@@ -65,6 +65,53 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-20160306" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/03/06/20160306/" class="article-date">
+  <time datetime="2016-03-05T16:35:51.000Z" itemprop="datePublished">2016-03-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/06/20160306/">brew的trouble shooting</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>笔记本上运行<code>brew update</code>会出现以下错误<br><figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ brew update</span><br><span class="line">/System/Library/Frameworks/Ruby.framework/Versions/<span class="number">2.0</span>/usr/<span class="keyword">lib</span>/ruby/<span class="number">2.0</span>.0/rubygems/core_ext/kernel_require.rb:<span class="number">55</span>:<span class="keyword">in</span> `require<span class="comment">': cannot load such file -- mach (LoadError)</span></span><br><span class="line">	<span class="keyword">from</span> /System/Library/Frameworks/Ruby.framework/Versions/<span class="number">2.0</span>/usr/<span class="keyword">lib</span>/ruby/<span class="number">2.0</span>.0/rubygems/core_ext/kernel_require.rb:<span class="number">55</span>:<span class="keyword">in</span> `require<span class="comment">'</span></span><br><span class="line">	<span class="keyword">from</span> /usr/local/Library/Homebrew/extend/pathname.rb:<span class="number">2</span>:<span class="keyword">in</span> `&lt;top (required)&gt;<span class="comment">'</span></span><br><span class="line">	<span class="keyword">from</span> /System/Library/Frameworks/Ruby.framework/Versions/<span class="number">2.0</span>/usr/<span class="keyword">lib</span>/ruby/<span class="number">2.0</span>.0/rubygems/core_ext/kernel_require.rb:<span class="number">55</span>:<span class="keyword">in</span> `require<span class="comment">'</span></span><br><span class="line">	<span class="keyword">from</span> /System/Library/Frameworks/Ruby.framework/Versions/<span class="number">2.0</span>/usr/<span class="keyword">lib</span>/ruby/<span class="number">2.0</span>.0/rubygems/core_ext/kernel_require.rb:<span class="number">55</span>:<span class="keyword">in</span> `require<span class="comment">'</span></span><br><span class="line">	<span class="keyword">from</span> /usr/local/Library/Homebrew/<span class="keyword">global</span>.rb:<span class="number">3</span>:<span class="keyword">in</span> `&lt;top (required)&gt;<span class="comment">'</span></span><br><span class="line">	<span class="keyword">from</span> /System/Library/Frameworks/Ruby.framework/Versions/<span class="number">2.0</span>/usr/<span class="keyword">lib</span>/ruby/<span class="number">2.0</span>.0/rubygems/core_ext/kernel_require.rb:<span class="number">55</span>:<span class="keyword">in</span> `require<span class="comment">'</span></span><br><span class="line">	<span class="keyword">from</span> /System/Library/Frameworks/Ruby.framework/Versions/<span class="number">2.0</span>/usr/<span class="keyword">lib</span>/ruby/<span class="number">2.0</span>.0/rubygems/core_ext/kernel_require.rb:<span class="number">55</span>:<span class="keyword">in</span> `require<span class="comment">'</span></span><br><span class="line">	<span class="keyword">from</span> /usr/local/Library/brew.rb:<span class="number">15</span>:<span class="keyword">in</span> `&lt;main&gt;<span class="comment">'</span></span><br></pre></td></tr></table></figure></p>
+<p>stackoverflow上有人给出的建议是</p>
+<blockquote>
+<p>First, open terminal and <code>cd /usr/local/</code>, and<code>git status</code> to see if Homebrew is clean.<br>if dirty, <code>git reset --hard &amp;&amp; git clean -df</code><br>then <code>brew doctor</code>, <code>brew update</code><br>If still broken, try this in your terminal:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo rm <span class="regexp">/System/</span>Library<span class="regexp">/Frameworks/</span>Ruby.framework<span class="regexp">/Versions/</span>Current</span><br><span class="line">$ sudo ln -s <span class="regexp">/System/</span>Library<span class="regexp">/Frameworks/</span>Ruby.framework<span class="regexp">/Versions/</span><span class="number">1.8</span> <span class="regexp">/System/</span>Library<span class="regexp">/Frameworks/</span>Ruby.framework<span class="regexp">/Versions/</span>Current</span><br></pre></td></tr></table></figure></p>
+<p>This will force Homebrew to use ruby 1.8 from system</p>
+</blockquote>
+<p><a href="http://stackoverflow.com/questions/24652996/homebrew-not-working-on-osx" target="_blank" rel="external">原文链接</a></p>
+<p>结果brew真的恢复正常了。然后就发现brew的版本过老。。。。update的时候还是会出现问题<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ brew update</span><br><span class="line"><span class="string">warning:</span> unable to unlink CONTRIBUTING.<span class="string">md:</span> Permission denied</span><br><span class="line"><span class="string">warning:</span> unable to unlink SUPPORTERS.<span class="string">md:</span> Permission denied</span><br><span class="line"><span class="string">fatal:</span> cannot create directory at <span class="string">'.github'</span>: Permission denied</span><br><span class="line"><span class="string">Error:</span> Failure <span class="keyword">while</span> <span class="string">executing:</span> git pull -q origin refs<span class="regexp">/heads/</span><span class="string">master:</span>refs<span class="regexp">/remotes/</span>origin/master</span><br></pre></td></tr></table></figure></p>
+<p>然后就是一开始的那个错误。再清理一遍git。。。<br>要想解决问题还要从根源入手<br><code>sudo chown -R $(whoami):admin /usr/local</code><br>之后再来<code>brew update</code>就一切正常了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://vc1235.github.io/2016/03/06/20160306/" data-id="cilfe217v0000tu2ox52yq4pa" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mac/">mac</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-好久没写东西了" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/03/03/好久没写东西了/" class="article-date">
@@ -92,7 +139,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vc1235.github.io/2016/03/03/好久没写东西了/" data-id="cilb2yktq0009sq2odh9lvcuq" class="article-share-link">Share</a>
+      <a data-url="http://vc1235.github.io/2016/03/03/好久没写东西了/" data-id="cilfe218j000atu2o0sau62ym" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/杂谈/">杂谈</a></li></ul>
@@ -134,7 +181,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vc1235.github.io/2015/07/21/justinmind的破解/" data-id="cilb2yku3000nsq2o408jmnmw" class="article-share-link">Share</a>
+      <a data-url="http://vc1235.github.io/2015/07/21/justinmind的破解/" data-id="cilfe218v000otu2ocislstjd" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/justinmind/">justinmind</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mac/">mac</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/windows/">windows</a></li></ul>
@@ -180,7 +227,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vc1235.github.io/2015/06/11/关于移动网页的思考/" data-id="cilb2ykty000fsq2okowiqp14" class="article-share-link">Share</a>
+      <a data-url="http://vc1235.github.io/2015/06/11/关于移动网页的思考/" data-id="cilfe218o000gtu2osl9oy5gj" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/">web</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/交互设计/">交互设计</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/电商/">电商</a></li></ul>
@@ -220,7 +267,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vc1235.github.io/2015/05/18/试一下插入图片/" data-id="cilb2yktg0004sq2oyys38d2v" class="article-share-link">Share</a>
+      <a data-url="http://vc1235.github.io/2015/05/18/试一下插入图片/" data-id="cilfe21860006tu2oz478efo3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -257,7 +304,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vc1235.github.io/2015/05/15/今天培训/" data-id="cilb2yku1000msq2ozil6lk6y" class="article-share-link">Share</a>
+      <a data-url="http://vc1235.github.io/2015/05/15/今天培训/" data-id="cilfe218r000ntu2o8sw71eg3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -294,7 +341,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vc1235.github.io/2015/05/14/填坑/" data-id="cilb2yktv000csq2ocf7bfjsx" class="article-share-link">Share</a>
+      <a data-url="http://vc1235.github.io/2015/05/14/填坑/" data-id="cilfe218l000dtu2o4hs4z8dw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mac/">mac</a></li></ul>
@@ -337,7 +384,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vc1235.github.io/2015/05/13/新坑-1/" data-id="cilb2yktn0005sq2o32cswgub" class="article-share-link">Share</a>
+      <a data-url="http://vc1235.github.io/2015/05/13/新坑-1/" data-id="cilfe218e0007tu2o7dx16dto" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mac/">mac</a></li></ul>
@@ -379,7 +426,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vc1235.github.io/2015/05/13/这次的补丁/" data-id="cilb2yktb0001sq2ouwjuhj76" class="article-share-link">Share</a>
+      <a data-url="http://vc1235.github.io/2015/05/13/这次的补丁/" data-id="cilfe21830003tu2ozwpglajv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
@@ -418,7 +465,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vc1235.github.io/2015/05/12/hello/" data-id="cilb2yku7000tsq2odv1sc5mk" class="article-share-link">Share</a>
+      <a data-url="http://vc1235.github.io/2015/05/12/hello/" data-id="cilfe218y000utu2ohhnwrl6d" class="article-share-link">Share</a>
       
       
     </footer>
@@ -428,51 +475,10 @@
 
 
   
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/05/12/hello-world/" class="article-date">
-  <time datetime="2015-05-12T14:39:06.000Z" itemprop="datePublished">2015-05-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/05/12/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://vc1235.github.io/2015/05/12/hello-world/" data-id="cilb2yksu0000sq2oz85nhjrq" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 </section>
         
@@ -484,7 +490,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/justinmind/">justinmind</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/">windows</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/交互设计/">交互设计</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂谈/">杂谈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/电商/">电商</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/justinmind/">justinmind</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/">windows</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/交互设计/">交互设计</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂谈/">杂谈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/电商/">电商</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -493,7 +499,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/hexo/" style="font-size: 20px;">hexo</a><a href="/tags/justinmind/" style="font-size: 10px;">justinmind</a><a href="/tags/mac/" style="font-size: 20px;">mac</a><a href="/tags/web/" style="font-size: 10px;">web</a><a href="/tags/windows/" style="font-size: 10px;">windows</a><a href="/tags/交互设计/" style="font-size: 10px;">交互设计</a><a href="/tags/杂谈/" style="font-size: 10px;">杂谈</a><a href="/tags/电商/" style="font-size: 10px;">电商</a>
+      <a href="/tags/hexo/" style="font-size: 15px;">hexo</a><a href="/tags/justinmind/" style="font-size: 10px;">justinmind</a><a href="/tags/mac/" style="font-size: 20px;">mac</a><a href="/tags/web/" style="font-size: 10px;">web</a><a href="/tags/windows/" style="font-size: 10px;">windows</a><a href="/tags/交互设计/" style="font-size: 10px;">交互设计</a><a href="/tags/杂谈/" style="font-size: 10px;">杂谈</a><a href="/tags/电商/" style="font-size: 10px;">电商</a>
     </div>
   </div>
 
@@ -502,7 +508,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a><span class="archive-list-count">7</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a><span class="archive-list-count">7</span></li></ul>
     </div>
   </div>
 
@@ -512,6 +518,10 @@
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/03/06/20160306/">brew的trouble shooting</a>
+          </li>
         
           <li>
             <a href="/2016/03/03/好久没写东西了/">好久没写东西了</a>
@@ -527,10 +537,6 @@
         
           <li>
             <a href="/2015/05/18/试一下插入图片/">试一下插入图片</a>
-          </li>
-        
-          <li>
-            <a href="/2015/05/15/今天培训/">今天培训</a>
           </li>
         
       </ul>
